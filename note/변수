@@ -1,0 +1,29 @@
+1. 변수 선언 : 변수타입 + 변수명
+              int age;
+              
+2. 변수의 초기화 : 변수를 사용하기 전 처음으로 값을 저장하는 것
+
+3. 자료형
+  1) 기본형 : 실제 값을 저장 (data)
+        └ 논리형 boolean / 문자형 char / 정수형 byte, short, int, long / 실수형 float, double 
+  2) 참조형 : 어떤 값이 저장돼있는 주소를 값으로 가짐 (memory address)
+        └ 객체의 주소를 저장
+          Date today = new Date(); // Date 객체를 생성해서, 그 주소를 today에 저장 -> Date 클래스 타입의 참조변수 today를 선언해줌
+     
+ 4. 상수 : final을 붙여주면 값을 변경할 수 없는 상수가 된다. ex) final double PI = 3.14.....;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
