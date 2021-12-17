@@ -1,3 +1,4 @@
+package a1변수의타입;
 
 public class 두변수값교환 {
 	public static void main(String[] args) {
