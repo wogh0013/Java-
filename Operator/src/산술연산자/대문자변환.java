@@ -1,4 +1,4 @@
-package a2산술연산자;
+package 산술연산자;
 
 public class 대문자변환 {
 	public static void main(String[] args) {

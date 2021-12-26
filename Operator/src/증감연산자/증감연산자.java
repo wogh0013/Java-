@@ -1,4 +1,4 @@
-package a1증감연산자;
+package 증감연산자;
 
 public class 증감연산자 {
 	public static void main(String[] args) {
