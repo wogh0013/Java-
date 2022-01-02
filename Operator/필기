@@ -16,5 +16,4 @@
     조건식 ? 식1 : 식2
                     └false
                     
-    result = (x>y) ? x : y ;       
-   
+    result = (x>y) ? x : y ;     
