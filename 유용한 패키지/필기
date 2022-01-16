@@ -1,0 +1,153 @@
+<java.lang 패키지> : 자바프로그래밍에 가장 기본이 되는 클래스들을 포함하고 있다.
+					-> import문 없이 사용할 수 있다.
+					
+1. Object 클래스 : 모든 클래스의 최고 조상
+ 1) equals는 주솟값으로 비교한다. 
+	-> 서로 다른 두 객체를 equals 메서드로 비교하면 항상 false 결과를 얻게 된다.
+	   주솟값을 같게 하면 true !
+	   
+ 2) hashCode() : 해시함수를 구현한 것이다. 다량의 데이터를 저장하고 검색하는 데 유용하다.(데이터 관리기법)
+  - 찾고자 하는 값을 입력 -> 그 값이 저장된 위치를 알려주는 해시코드 반환
+  - String 클래스는 문자열의 내용이 같으면 동일한 해시코드 반환
+  - System.identityHashCode(Object x) -> 객체의 주솟값으로 해시코드 반환 -> 모든 객체에 대해 다른 해시코드 반환 	
+
+ 3) toString() : 인스턴스에 대한 정보를 문자열(String)로 제공
+  - 변수에 저장된 값들을 문자열로 표현
+  
+ 4) clone() : 자신을 복제하여 새로운 인스턴스를 생성
+  - clone을 통해 새로운 인스턴스를 생성하면, 작업이전의 값이 보존되므로 여러 실험(?)을 해볼 수 있음.
+    쉽게 말해 복구 작업이 수월해진다.
+
+ 5) 얕은 복사 : 단순히 객체에 저장된 값을 복사, 객체가 참조하고 있는 객체까지 복사 X
+ 									   └ 원본과 복사본이 서로 같은 객체를 참조 -> 원본의 변경이 복사본에 영향을 미침.
+    깊은 복사 :                          객체가 참조하고 있는 개체까지 복사 O
+                                       └ 원본과 복사본이 서로 다른 객체를 참조 -> 원본의 변경이 복사본에 영향을 미치지 않음.
+ 
+  6) getClass() : 자신이 속한 클래스의 Class객체를 반환하는 메서드. 
+     (Class 객체 : 이름이 'Class'인 클래스의 객체, 클래스의 모든 정보 O, 클래스당 1개 존재
+     
+     
+2. String 클래스
+ 1) 문자열을 만드는 방법(문자열 리터럴을 지정하는 방법, String클래스의 생성자를 사용하는 방법)
+  - String str1 = "abc"; //문자열 리터럴 "abc"의 주소가 str1에 저장됨 -> 이미 존재하는 것을 재사용
+    String str2 = new String("abc"); //새로운 String인스턴스를 생성 -> 새로운 String 인스턴스 생성, 메모리 할당
+
+ 2) 빈 문자열
+  - String은 빈 문자열 가능(O) / Char는 빈 문자열 불가능(X)
+  - char[] chArr = new char[0]; //길이가 0인 char배열
+  - int[] iArr = {};            //길이가 0인 int배열
+
+ 3) join() : 여러 문자열 사이에 구분자를 넣어서 결합
+ 	split() : 구분자로 문자열을 자름
+ 	
+ 4) String.format()
+     └ 형식화된 문자열을 만들어냄
+     String str = String.format("%d 더하기 %d는 %d입니다.", 3, 5, 3+5);
+     System.out.println(str); // 3 더하기 5는 8입니다.
+ 
+ 5) 기본형 값을 String으로 변환
+  - int i = 100;
+    String str1 = i + "";            // 100을 "100"으로 변환  by 빈 문자열을 더해줌
+    String str2 = String.valueOf(i); // 100을 "100"으로 변환  by valueOf() 사용
+
+	String을 기본형 값으로 변환
+  - int i = Integer.parseInt("100"); // "100"을 100으로 변환
+    int i = Integer.valueOf("100");  // "100"을 100으로 변환 
+
+3. StringBuffer 클래스와 StringBuilder 클래스
+ - String 클래스 : 인스턴스를 생성할 때 지정된 문자열 변경 X
+ - StringBuffer 클래스 : 인스턴스를 생성할 때 지정된 문자열 변경 O, 크기 지정 가능
+ 		└ 편집할 문자열의 길이를 고려하여 버퍼의 길이를 충분히 잡아줘야 함 -> 효율적인 작업 가능
+ 		  인스턴스를 생성할 때 적절한 길이의 cha형 배열 생성 -> 문자열을 저장하고 편집하기 위한 공간으로 사용됨
+ - StringBuffer의 생성자 : StringBuffer인스턴스에 저장될 문자열의 길이를 고려하여충분히 여유있는 크기로 지정.
+ - String과 달리 StringBuffer는 내용을 변경할 수 있다.
+ 	StringBuffer sb = new StringBuffer("abc");
+ 	sb.append("123");
+ 	StringBuffer sb2 = sb.append("ZZ");
+ 	//sb.append("123").append("ZZ"); //연속적으로 append() 호출 가능
+ 									 //why? sb와 sb2가 모두 같은 StringBuffer 인스턴스를 참조하고 있으므로.
+
+equals 메소드는 String 참조 변수가 갖고 있는 값을 비교한 것이고,
+== 연산자는 String 참조 변수가 갖고 있는 객체의 주솟값을 비교한 것이다.
+String str = new String("123");
+String str2 = new String("123");
+System.out.println(str.equals(str2)); // 값 비교 -> true
+System.out.println(str==str2);		  // 주솟값 비교 -> false
+
+  - StringBuffer의 비교
+    : StringBuffer 클래스는 equals 메서드를 오버라이딩 X
+       -> equals 메서드를 사용해도 == 로 비교한 것과 같은 결과를 얻음 (주솟값 비교)
+    : toString() 메서드는 오버라이딩 O -> equals로 비교하기 위해선 toString() 메서드를 활용해야 함.
+       -> StringBuffer 인스턴스에 담긴 문자열을 비교하려면 toString()을 호출해서 String인스턴스를 얻은 후 equals 메서드를 사용해서 비교
+  
+  - StringBuilder
+   : StringBuffer는 멀티쓰레드에 안전하도록 동기화돼있음. -> 동기화가 StringBuffer의 성능을 떨어뜨림
+   : (StringBuilder) = (StringBuffer) - (쓰레드의 동기화)
+   : StringBuffer와 완전히 똑같은 기능으로 작성(문법이 똑같음)     
+ 									 
+ 									 
+4. Math 클래스
+ 반올림 round(90.755) = 91 -> round()는 소숫점 첫째자리에서 반올림함(int형 반환)
+ 반올림 rint(1.5) = 2.000000 -> rint()도 소숫점 첫째자리에서 반올림함(double형 반환)
+ 올림 ceil(1.1) = 2.0
+     ceil(-1.5) = -1.000000
+ 버림 floor(1.5) = 1.0
+ 	 floor(-1.5) = -2.000000
+ round(1.1) = 1
+ round(1.5) = 2
+ round(-1.5) = -1
+
+ - 삼각함수, 지수, 로그
+ sin() cos()
+ 제곱근 sqrt()    sqrt(2) 는 루트2
+ n제곱 pow()      pow(x, 2)는 x의 제곱
+ 
+ -
+ Math.abs();
+ Math.ceil();
+ Math.floor();
+ Math.max();
+ Math.min();
+ Math.random();
+ Math.round();
+ Math.rint();
+ 
+ 
+5. wrapper(래퍼) 클래스
+ - 자바에서는 8개의 기본형을 객체로 다루지 않음
+   -> 기본형 변수도 객체로 다뤄야 할 때 래퍼 클래스 사용 (각 기본형마다 래퍼 클래스가 있음, 총 8개)
+      char형과 int형을 제외하면 자료형 이름의 첫 글자를 대문자로 한 것이 각 래퍼 클래스의 이름이다.
+	  (Boolean, Character, Byte, Short, Integer, Long, Float, Double)
+	
+	문자열 -> 기본형
+	byte b = Byte.parseByte("100");
+	short s = Short.parseShort("100");
+	int i = Integer.parseInt("100");
+	long l = Long.parseLong("100");
+	float f = Float.parseFloat("3.14");
+	double d = Double.parseDouble("3.14");
+	
+ - 오토박싱 : 기본형 값 -> 래퍼 클래스의 객체로 자동변환 해주는 것	
+ - 언박싱   : 래퍼 클래스의 객체 -> 기본형 값으로 자동변환 해주는 것	
+	
+<유용한 클래스>
+1. java.util.Objects 클래스
+ - Object 클래스의 보조 클래스, 모든 메서드가 static이다.
+ - 객체의 비교, 널 체크에 유용하다.
+
+2. java.util.Random 클래스
+ - 1~6 사이의 정수를 얻고자 할 때
+ int num = (int)(Math.random()*6)+1;
+ int num = new Random().nextInt(6)+1;
+
+3. 정규식-java.util.regex 패키지
+ - 텍스트 데이터 중 원하는 조건(패턴)과 일치하는 문자열을 찾아내기 위해 사용하는 것
+ - 미리 정의된 기호와 문자를 이용해서 작성한 문자열
+
+4. java.util.Scanner 클래스
+ - 화면, 파일, 문자열과 같은 입력소스로부터 문자 데이터를 읽어오는데 도움을 주는 클래스
+
+5. java.util.StringTokenizer 클래스
+ - 긴 문자열을 지정된 구분자를 기준으로 토큰이라는 여러 개의 문자열로 잘라내는 데 사용된다.
+ ex) "100,200,300,400"의 문자열이 있을 때 ','를 구분자로 잘라내면
+     "100", "200", "300", "400"이라는 4개의 문자열을 얻을 수 있다.
